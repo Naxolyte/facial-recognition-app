@@ -5,22 +5,22 @@ const Register = ({ onRouteChange, loadUser }) => {
   const [newEmail, setNewEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
-  const onNewNameChange = (event) => {
+  const onNewNameChange = event => {
     setNewName(event.target.value);
   };
 
-  const onNewEmailChange = (event) => {
+  const onNewEmailChange = event => {
     setNewEmail(event.target.value);
   };
 
-  const onNewPasswordChange = (event) => {
+  const onNewPasswordChange = event => {
     setNewPassword(event.target.value);
   };
 
   const onSubmitRegister = () => {
     if (newName === '' || newEmail === '' || newPassword === '') {
     } else {
-      fetch('http://localhost:3000/register', {
+      fetch('https://glacial-mesa-50946.herokuapp.com/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -29,9 +29,9 @@ const Register = ({ onRouteChange, loadUser }) => {
           name: newName,
         }),
       })
-        .then((response) => response.json())
-        .then((user) => {
-          if (user) {
+        .then(response => response.json())
+        .then(user => {
+          if (user.id) {
             loadUser(user);
             onRouteChange('home');
           }

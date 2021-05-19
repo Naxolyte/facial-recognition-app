@@ -4,17 +4,16 @@ const SignIn = ({ onRouteChange, loadUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onEmailChange = (event) => {
-    setEmail(event.target.value );
+  const onEmailChange = event => {
+    setEmail(event.target.value);
   };
 
-  const onPasswordChange = (event) => {
-    setPassword( event.target.value );
+  const onPasswordChange = event => {
+    setPassword(event.target.value);
   };
 
   const onSubmitSignIn = () => {
-    console.log(email, password);
-    fetch('http://localhost:3000/signin', {
+    fetch('https://glacial-mesa-50946.herokuapp.com/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -22,10 +21,10 @@ const SignIn = ({ onRouteChange, loadUser }) => {
         password: password,
       }),
     })
-      .then((response) => response.json())
-      .then((user) => {
+      .then(response => response.json())
+      .then(user => {
         if (user.id) {
-          loadUser(user)
+          loadUser(user);
           onRouteChange('home');
         }
       });
